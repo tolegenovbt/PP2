@@ -7,7 +7,8 @@ namespace task2
         static void Main(string[] args)
         {
             string[] s = Console.ReadLine().Split();//inputting information about a student and split it into 3 strings
-            Student newby = new Student(s[0],s[1],int.Parse(s[2]));//creating a new student and giving value for the variables(for 'year' via parse)
+            Student newby = new Student(s[0], s[1]);//creating a new student and giving value for the variables(for 'year' via parse)
+            newby.year = int.Parse(s[2]);
             newby.addyear();
             newby.PrintInfo();
             Console.ReadKey();
@@ -19,17 +20,16 @@ namespace task2
         public string id;
         public int year;
 
-        public Student(string name, string id, int year) //creating a constructer 
+        public Student(string name, string id) //creating a constructer with 2 parameters
         {
             this.name = name;
             this.id = id;
-            this.year = year;
         }
-        public void addyear()//command for adding year
+        public void addyear()//method for adding year
         {
             year++;
         }
-        public void PrintInfo()//command for outputting information about the student 
+        public void PrintInfo()//method for outputting information about the student 
         {
             Console.WriteLine(name + " " + id + " " + year);
         }

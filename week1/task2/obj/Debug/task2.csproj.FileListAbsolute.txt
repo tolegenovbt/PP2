@@ -5,3 +5,10 @@ C:\Users\11111\Desktop\studyspace\c#\lab1\task2\obj\Debug\task2.csprojAssemblyRe
 C:\Users\11111\Desktop\studyspace\c#\lab1\task2\obj\Debug\task2.csproj.CoreCompileInputs.cache
 C:\Users\11111\Desktop\studyspace\c#\lab1\task2\obj\Debug\task2.exe
 C:\Users\11111\Desktop\studyspace\c#\lab1\task2\obj\Debug\task2.pdb
+C:\Users\11111\Desktop\studyspace\c#\labs\week1\task2\bin\Debug\task2.exe.config
+C:\Users\11111\Desktop\studyspace\c#\labs\week1\task2\bin\Debug\task2.exe
+C:\Users\11111\Desktop\studyspace\c#\labs\week1\task2\bin\Debug\task2.pdb
+C:\Users\11111\Desktop\studyspace\c#\labs\week1\task2\obj\Debug\task2.csprojAssemblyReference.cache
+C:\Users\11111\Desktop\studyspace\c#\labs\week1\task2\obj\Debug\task2.csproj.CoreCompileInputs.cache
+C:\Users\11111\Desktop\studyspace\c#\labs\week1\task2\obj\Debug\task2.exe
+C:\Users\11111\Desktop\studyspace\c#\labs\week1\task2\obj\Debug\task2.pdb
