@@ -11,7 +11,7 @@ namespace task1
     {
         static void Main(string[] args)
         {
-            FileStream f = new FileStream(@"...\input.txt", FileMode.Open, FileAccess.Read);
+            FileStream f = new FileStream(@"C:\Users\11111\c#\labs\week2\task1\input.txt", FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(f);
             string s = sr.ReadLine();
             int cnt = 0;
