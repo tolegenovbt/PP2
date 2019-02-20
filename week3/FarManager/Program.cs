@@ -5,37 +5,33 @@ using System.Collections.Generic;
 
 namespace FarManager
 {
-    enum Mode { directory, file }
+    enum Mode { directory, file }//для того чтобы знать файл или папка
     class Program
     {
         public static void Main()
         {
-            DirectoryInfo dir = new DirectoryInfo(@"C:\Users\11111\tester");
-            Folder folder = new Folder(dir);
-            Stack<Folder> dirs = new Stack<Folder>();
-            dirs.Push(folder);
-            bool run = true;
-            Mode mode = Mode.directory;
+            DirectoryInfo dir = new DirectoryInfo(@"C:\Users\11111\tester");//даю путь к основному файлу
+            Folder folder = new Folder(dir);//дается параметр для конструктора
+            Stack<Folder> dirs = new Stack<Folder>();//новый стэк для запоминания расположении файлов
+            dirs.Push(folder);//пушиться главная папка в стэк
+            bool run = true;//программа будет работать пока true
+            Mode mode = Mode.directory;// пока что в начале даем тип папку
             while (run)
             {
-                if (mode == Mode.directory)
+                if (mode == Mode.directory)//если папка то выполняется метод принтер
                     dirs.Peek().Printer();
-                ConsoleKeyInfo pressedkey = Console.ReadKey();
+                ConsoleKeyInfo pressedkey = Console.ReadKey();//будет считывать нажатую кнопку
                 switch (pressedkey.Key)
                 {
-                    case ConsoleKey.UpArrow:
+                    case ConsoleKey.UpArrow://для прогулки вверх и вниз
                         dirs.Peek().Up();
                         break;
 
-                    case ConsoleKey.DownArrow:
+                    case ConsoleKey.DownArrow://для прогулки вниз
                         dirs.Peek().Down();
                         break;
 
-                    case ConsoleKey.Delete:
-                        dirs.Peek().Kill();
-                        break;
-
-                    case ConsoleKey.Enter:
+                    case ConsoleKey.Enter://заходит внутрь папки или же показывает текс внутри файла
                         FileSystemInfo selected = dirs.Peek().GetIndexObj();
                         if (selected.GetType() == typeof(DirectoryInfo))
                         {
@@ -58,18 +54,26 @@ namespace FarManager
                             sr.Close();
                         }
                         break;
-                    case ConsoleKey.R:
-                        FileSystemInfo select = dirs.Peek().GetIndexObj();
-                        dirs.Peek().Rename(select);
+                    case ConsoleKey.R://меняет имя 
+                        //FileSystemInfo select = dirs.Peek().GetIndexObj();
+                        dirs.Peek().Rename();
+                        //dirs.Pop();
+                        dirs.Peek().Printer();
                         break;
 
-                    case ConsoleKey.Backspace:
+                    case ConsoleKey.Delete://удалить файл или папку
+                        dirs.Peek().Kill();//вызывает для файлов или папок метод удаления
+                        //dirs.Pop();
+                        dirs.Peek().Printer();
+                        break;
+
+                    case ConsoleKey.Backspace://выходит из папки
                         if (dirs.Count > 1)
                             dirs.Pop();
                         break;
 
-                    case ConsoleKey.Escape:
-                        if (mode == Mode.directory)
+                    case ConsoleKey.Escape://выходит из файла
+                        if (mode == Mode.directory)//если нажать внутри папки, выходит из программы 
                             run = false;
                         else
                             mode = Mode.directory;
@@ -85,36 +89,36 @@ namespace FarManager
     }
     class Folder
     {
-        int Index;
-        FileSystemInfo[] contents;
-        public string FullPath;
-        public string DirPath;
+        int Index;//индекс объектов внутри папки
+        FileSystemInfo[] contents;//объекты внутри папок
+        public string FullPath;//полный путь к объекту
+        public string DirPath;//полный путь к папки внутри которой находится объект
 
 
-        public Folder(DirectoryInfo directory)
+        public Folder(DirectoryInfo directory)//конструктор с параметром DirectoryInfo
         {
             Index = 0;
             contents = directory.GetFileSystemInfos();
             DirPath = directory.FullName;
         }
 
-        public void Up()
+        public void Up()//метод для прогулки вверх
         {
-            if (Index == 0)
+            if (Index == 0)//с первого объекта переходит к последнему
                 Index = contents.Length - 1;
             else
                 Index--;
-            FullPath = contents[Index].FullName;
+            FullPath = contents[Index].FullName;//полный путь к выбранному файлу
         }
-        public void Down()
+        public void Down()//вниз
         {
-            if (Index == contents.Length - 1)
+            if (Index == contents.Length - 1)//с последнего к первому
                 Index = 0;
             else
                 Index++;
             FullPath = contents[Index].FullName;
         }
-        public FileSystemInfo GetIndexObj()
+        public FileSystemInfo GetIndexObj()//метод для получения индекса объекта
         {
             return contents[Index];
         }
@@ -125,54 +129,50 @@ namespace FarManager
 
             for (int i = 0; i < contents.Length; i++)
             {
-                // Setup colors for foreground and background colors
+                // цвета чтобы видеть курсор
 
-                if (i == Index)
+                if (i == Index)//бэкграунд выбранного объекта
                 {
                     Console.BackgroundColor = ConsoleColor.Cyan;
                 }
-                else
+                else//для остальных 
                 {
                     Console.BackgroundColor = ConsoleColor.DarkBlue;
                 }
 
                 if (contents[i].GetType() == typeof(DirectoryInfo))
                 {
-                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.White;//папки белым цветом
                 }
-                else // FileInfo
+                else
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.Green;//файлы зеленым
                 }
 
                 Console.WriteLine(contents[i].Name);
             }
         }
-        public void Kill()
+        public void Kill()//метод для удаления
         {
-            if (File.Exists(FullPath))
+            if (File.Exists(FullPath))//удаляет выбранный файл
                 File.Delete(FullPath);
             else
-                Directory.Delete(FullPath);
+                Directory.Delete(FullPath);//выбранную папку
         }
-        public void Rename(FileSystemInfo fis)
+        public void Rename()//переименовать
         {
-            Console.Clear();
-            string newname = Console.ReadLine();
+            Console.Clear();//чистит консоль
+            string newname = Console.ReadLine();//новое имя
             string path = Path.Combine(DirPath, newname);
-            if (fis.GetType() == typeof(DirectoryInfo))
+            if (File.Exists(FullPath))
             {
-                Directory.Move(@FullPath, @path);
+                File.Copy(FullPath, path, true);//копирует
+                File.Delete(FullPath);//удаляет
             }
             else
             {
-                File.Copy(FullPath, path, true);
-                File.Delete(FullPath);
+                Directory.Move(@FullPath, @path);//сразу же копирует и удаляет
             }
-        }
-        public void Refresh()
-        {
-
         }
     }
 

@@ -14,8 +14,8 @@ namespace task4
             path = Path.Combine(path, name); //combining path for the first file
             path2 = Path.Combine(path2, name2);//combining path for the second file
             File.WriteAllText(path, "To infinity and beyond");//writing a text in the file
-            File.Copy(path,path2,false);//copying one files text into another one
-            File.Delete(path);//deleting the orinal file
+            File.Copy(path,path2,true);//copying one files text into another one
+            File.Delete(path);//deleting the original file
         }
     }
 }
