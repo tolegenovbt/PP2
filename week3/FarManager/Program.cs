@@ -137,7 +137,7 @@ namespace FarManager
                 }
                 else//для остальных 
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.BackgroundColor = ConsoleColor.Cyan;
                 }
 
                 if (contents[i].GetType() == typeof(DirectoryInfo))
