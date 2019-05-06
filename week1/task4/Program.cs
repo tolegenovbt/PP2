@@ -13,7 +13,7 @@ namespace task4
                 {
                     Console.Write("[*]");
                 }
-                Console.Write('\n'); //jumping to the next line
+                Console.WriteLine(); //jumping to the next line
             }
             Console.ReadKey();
         }

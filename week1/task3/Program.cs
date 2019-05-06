@@ -14,9 +14,10 @@ namespace task3
                 array[i] = int.Parse(s[i]);//string to integer
             }
             WW(array, n);//calling the function and giving the array with integers and number of the integers
+
             Console.ReadKey();
         }
-        static void WW(int[] array, int n)//function for doubling the array
+        public static void WW(int[] array, int n)//function for doubling the array
         {
             int[] array2 = new int[2 * n];//creating  a new array with 2*n elements
             int j = 0; //for elements of the first array

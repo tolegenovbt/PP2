@@ -9,6 +9,7 @@ namespace task1
             int cnt = 0; //to find number of prime integers 
             int n = int.Parse(Console.ReadLine()); //number of input integers 
             int[] array = new int[n]; //a new array to save prime numbers
+            
             string[] s = Console.ReadLine().Split(); //the numbers 
             for (int i = 0; i < n; i++)
             {
@@ -22,9 +23,14 @@ namespace task1
                 if (cnt1 == 1)
                     array[cnt++] = k;   
             }
-            Console.WriteLine(cnt); //the first output- number of the prime integers
-            for (int i = 0; i < cnt; i++) //loop to output each of the prime integers
-                Console.Write(array[i]+" ");
+            
+            if (cnt != 0)
+            {
+                Console.WriteLine(cnt); //the first output- number of the prime integers
+                for (int i = 0; i < cnt; i++) //loop to output each of the prime integers
+                    Console.Write(array[i] + " ");
+                
+            }
             Console.ReadKey();
         }
     }

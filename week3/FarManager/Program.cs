@@ -13,7 +13,7 @@ namespace FarManager
             DirectoryInfo dir = new DirectoryInfo(@"C:\Users\11111\tester");//даю путь к основному файлу
             Folder folder = new Folder(dir);//дается параметр для конструктора
             Stack<Folder> dirs = new Stack<Folder>();//новый стэк для запоминания расположении файлов
-            dirs.Push(folder);//пушиться главная папка в стэк
+            dirs.Push(folder);//пушится главная папка в стэк
             bool run = true;//программа будет работать пока true
             Mode mode = Mode.directory;// пока что в начале даем тип папку
             while (run)
@@ -91,8 +91,8 @@ namespace FarManager
     {
         int Index;//индекс объектов внутри папки
         FileSystemInfo[] contents;//объекты внутри папок
-        public string FullPath;//полный путь к объекту
-        public string DirPath;//полный путь к папки внутри которой находится объект
+        public string FullPath=null;//полный путь к объекту
+        public string DirPath=null;//полный путь к папки внутри которой находится объект
 
 
         public Folder(DirectoryInfo directory)//конструктор с параметром DirectoryInfo
@@ -137,7 +137,7 @@ namespace FarManager
                 }
                 else//для остальных 
                 {
-                    Console.BackgroundColor = ConsoleColor.Cyan;
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
                 }
 
                 if (contents[i].GetType() == typeof(DirectoryInfo))
