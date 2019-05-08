@@ -27,18 +27,19 @@ namespace StudentsDB
 
             // SQL INJECTION
             //Daulet', 'Bolatovich', 'Kabdiyev'); INSERT INTO Students(FirstName, LastName) VALUES('TEST', 'TEST'); INSERT INTO Students(FirstName, MiddleName, LastName) VALUES('Another name
-
+            string[] f = firstnametxtbox.Text.Split();
+            string[] m = middlenametxtbox.Text.Split();
+            string[] l = lastnametxtbox.Text.Split();
             // Homework: finish this
             if (middlenametxtbox.Text.Length == 0)
             {
-                sqlCommand.CommandText = "INSERT INTO Students (FirstName, LastName) Values('" + firstnametxtbox.Text + "', '" + lastnametxtbox.Text + "')";
+                sqlCommand.CommandText = "INSERT INTO Students (FirstName, LastName) Values('" + f[0] + "', '" + l[0] + "')";
             }
             else
             {
-                sqlCommand.CommandText = "INSERT INTO Students (FirstName, MiddleName, LastName) Values('" + firstnametxtbox.Text + "', '" + middlenametxtbox.Text + "', '" + lastnametxtbox.Text + "')";
+                sqlCommand.CommandText = "INSERT INTO Students (FirstName, MiddleName, LastName) Values('" + f[0] + "', '" + m[0] + "', '" + l[0] + "')";
             }
 
-            sqlCommand.CommandText = "INSERT INTO Students (FirstName, MiddleName, LastName) Values('" + firstnametxtbox.Text + "', '" + middlenametxtbox.Text + "', '" + lastnametxtbox.Text + "')";
             //sqlCommand.CommandText = "INSERT INTO Students (FirstName, MiddleName, LastName) Values()";
             sqlCommand.ExecuteNonQuery();
 
